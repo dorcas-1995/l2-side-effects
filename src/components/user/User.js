@@ -12,6 +12,23 @@ function User(props){
         setCount(currentCount + 1)
     }
 
+    function randomise(){
+        fetch(RANDOM_USER_API)
+        .then( (response) => response.json())
+         .then( (jsonData) => {
+            const result = jsonData.results
+            const user = result[0]
+            const userName = `${user.name.title}: ${user.name.first} ${user.name.last}`
+            const userEmail = `${user.email}`
+            setName(userName)
+            setEmail(userEmail)
+        })
+    }
+
+    useEffect(
+        randomise, [count]
+    )
+
 
     return(
         <div>
